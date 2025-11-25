@@ -116,9 +116,7 @@ public class DocxToHtmlConverter {
         // Check if paragraph is a heading
         if (style != null && style.toLowerCase().startsWith("heading")) {
             processHeading(paragraph, style);
-        } else if (style != null && (style.equals("Heading1") || style.equals("Heading2") || 
-                   style.equals("Heading3") || style.equals("Heading4") || 
-                   style.equals("Heading5") || style.equals("Heading6"))) {
+        } else if (style != null && (style.equals("Heading1") || style.equals("Heading2") || style.equals("Heading3") || style.equals("Heading4") || style.equals("Heading5") || style.equals("Heading6"))) {
             processHeading(paragraph, style);
         } else {
             // Check paragraph outline level for headings
