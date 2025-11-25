@@ -3,10 +3,6 @@ package com.docreader;
 import com.docreader.converter.DocxToHtmlConverter;
 
 import java.io.IOException;
-
-/**
- * Main application class demonstrating how to use the DOCX to HTML converter.
- */
 public class Main {
 
     public static void main(String[] args) {
