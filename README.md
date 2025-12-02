@@ -2,7 +2,7 @@
 
 A simple Java application that converts Microsoft Word (.docx) files to clean, styled HTML. Perfect for converting documentation, reports, or any Word documents into web-ready HTML format.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### What You Need
 
@@ -12,7 +12,7 @@ A simple Java application that converts Microsoft Word (.docx) files to clean, s
 
 ---
 
-## 📦 Setup Instructions
+## Setup Instructions
 
 ### Step 1: Get the Project
 
@@ -36,11 +36,11 @@ mvn clean package
 
 This creates a runnable JAR file in the `target` folder.
 
-**✅ Setup Complete!** You're ready to convert documents.
+**Setup Complete!** You're ready to convert documents.
 
 ---
 
-## 📖 How to Use
+## How to Use
 
 ### Simple 3-Step Process
 
@@ -76,7 +76,7 @@ Check the `output` folder for your converted HTML file!
 
 ---
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### Example 1: Basic Conversion
 
@@ -100,32 +100,32 @@ java -jar target\docx-to-html-converter-1.0-SNAPSHOT.jar "input\My Report 2025.d
 
 ---
 
-## ✨ Features
+## Features
 
 ### What Gets Converted?
 
-#### 📝 **Headers**
+#### **Headers**
 
 - Heading 1 → `<h1>` (large header)
 - Heading 2 → `<h2>` (medium header)
 - Heading 3 → `<h3>` (smaller header)
 - Up to Heading 6 → `<h6>`
 
-#### 🎨 **Text Formatting**
+#### **Text Formatting**
 
 - **Bold text** → `<strong>`
 - _Italic text_ → `<em>`
 - <u>Underlined text</u> → `<u>`
 - Combined formatting supported!
 
-#### 📊 **Tables**
+#### **Tables**
 
 - Word tables convert to HTML tables
 - First row becomes table headers
 - Full structure preserved
 - Styled with borders and spacing
 
-#### 🚫 **Ignored Text**
+#### **Ignored Text**
 
 Text wrapped in `{{{triple curly braces}}}` will be automatically removed from the output.
 
@@ -133,7 +133,7 @@ Text wrapped in `{{{triple curly braces}}}` will be automatically removed from t
 
 ---
 
-## 🛠️ Advanced Usage
+## Advanced Usage
 
 ### Use in Your Own Java Code
 
@@ -162,7 +162,7 @@ public class MyConverter {
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 DocReader/
@@ -184,7 +184,7 @@ DocReader/
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### "Command not found: java"
 
@@ -213,7 +213,7 @@ mvn package
 
 ---
 
-## 📚 Technical Details
+## Technical Details
 
 ### Dependencies
 
@@ -233,13 +233,13 @@ The converter generates standards-compliant HTML5 with:
 
 ---
 
-## 📝 License
+## License
 
 This project is open source and available for educational and commercial use.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Found a bug? Have a feature idea? Contributions welcome!
 
@@ -249,7 +249,7 @@ Found a bug? Have a feature idea? Contributions welcome!
 
 ---
 
-## 📞 Questions?
+## Questions?
 
 If you run into issues, check:
 
