@@ -133,6 +133,12 @@ public class DocxToHtmlConverter {
                 continue;
             }
             
+            // Remove text enclosed in {{{ }}} (text to ignore)
+            text = removeIgnoredText(text);
+            if (text.isEmpty()) {
+                continue;
+            }
+            
             boolean isBold = run.isBold();
             boolean isItalic = run.isItalic();
             UnderlinePatterns underline = run.getUnderline();
@@ -160,6 +166,14 @@ public class DocxToHtmlConverter {
                 htmlBuilder.append("</strong>");
             }
         }
+    }
+
+    private String removeIgnoredText(String text) {
+        if (text == null) {
+            return "";
+        }
+        // Remove all text enclosed in {{{ }}}
+        return text.replaceAll("\\{\\{\\{[^}]*\\}\\}\\}", "");
     }
 
     private void processTable(XWPFTable table) {
