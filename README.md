@@ -1,165 +1,259 @@
 # DOCX to HTML Converter
 
-A Java tool that converts Microsoft Word (DOCX) files to HTML format, preserving document structure including headers, tables, and text formatting.
+A simple Java application that converts Microsoft Word (.docx) files to clean, styled HTML. Perfect for converting documentation, reports, or any Word documents into web-ready HTML format.
 
-## Features
+## 🚀 Quick Start
 
-- **Header Conversion**: Converts Word heading styles to HTML `<h1>`, `<h2>`, `<h3>`, etc.
-- **Table Support**: Converts Word tables to HTML tables with proper structure
-- **Text Formatting**: Preserves bold, italic, and underline formatting
-- **Clean HTML Output**: Generates well-formatted HTML with CSS styling
+### What You Need
 
-## Requirements
+- **Java 11 or higher** installed on your computer
+- **Maven 3.6 or higher** (for building the project)
+- A Word document (.docx) you want to convert
 
-- Java 11 or higher
-- Maven 3.6 or higher
+---
 
-## Installation
+## 📦 Setup Instructions
 
-1. Clone or download this project
-2. Navigate to the project directory
-3. Build the project using Maven:
+### Step 1: Get the Project
 
-```bash
+If you haven't already, clone or download this project to your computer.
+
+### Step 2: Open Terminal/Command Prompt
+
+Navigate to the project folder:
+
+```powershell
+cd path\to\DocReader
+```
+
+### Step 3: Build the Application
+
+Run this command to compile and package the application:
+
+```powershell
 mvn clean package
 ```
 
-## Usage
+This creates a runnable JAR file in the `target` folder.
 
-### Command Line
+**✅ Setup Complete!** You're ready to convert documents.
 
-Run the converter from the command line:
+---
 
-```bash
-java -jar target/docx-to-html-converter-1.0-SNAPSHOT.jar input.docx output.html
+## 📖 How to Use
+
+### Simple 3-Step Process
+
+#### **Step 1: Place Your Word Document**
+
+Put your `.docx` file in the `input` folder:
+
+```
+DocReader/
+├── input/           ← Put your .docx files here
+│   └── ARN Build Doc.docx
+├── output/          ← HTML files will appear here
+└── ...
 ```
 
-### Programmatic Usage
+#### **Step 2: Run the Converter**
 
-You can also use the converter in your own Java code:
+Use this command format:
+
+```powershell
+java -jar target\docx-to-html-converter-1.0-SNAPSHOT.jar input\YourFile.docx output\YourFile.html
+```
+
+**Real Example:**
+
+```powershell
+java -jar target\docx-to-html-converter-1.0-SNAPSHOT.jar "input\ARN Build Doc.docx" "output\ARN Build Doc.html"
+```
+
+#### **Step 3: Find Your HTML**
+
+Check the `output` folder for your converted HTML file!
+
+---
+
+## 💡 Usage Examples
+
+### Example 1: Basic Conversion
+
+```powershell
+java -jar target\docx-to-html-converter-1.0-SNAPSHOT.jar input\document.docx output\document.html
+```
+
+### Example 2: Using Full Paths
+
+```powershell
+java -jar target\docx-to-html-converter-1.0-SNAPSHOT.jar "C:\My Documents\report.docx" "C:\Web Files\report.html"
+```
+
+### Example 3: Files with Spaces in Names
+
+Always use quotes for filenames with spaces:
+
+```powershell
+java -jar target\docx-to-html-converter-1.0-SNAPSHOT.jar "input\My Report 2025.docx" "output\My Report 2025.html"
+```
+
+---
+
+## ✨ Features
+
+### What Gets Converted?
+
+#### 📝 **Headers**
+
+- Heading 1 → `<h1>` (large header)
+- Heading 2 → `<h2>` (medium header)
+- Heading 3 → `<h3>` (smaller header)
+- Up to Heading 6 → `<h6>`
+
+#### 🎨 **Text Formatting**
+
+- **Bold text** → `<strong>`
+- _Italic text_ → `<em>`
+- <u>Underlined text</u> → `<u>`
+- Combined formatting supported!
+
+#### 📊 **Tables**
+
+- Word tables convert to HTML tables
+- First row becomes table headers
+- Full structure preserved
+- Styled with borders and spacing
+
+#### 🚫 **Ignored Text**
+
+Text wrapped in `{{{triple curly braces}}}` will be automatically removed from the output.
+
+- Example: `Hello {{{ignore this}}} World` → `Hello  World`
+
+---
+
+## 🛠️ Advanced Usage
+
+### Use in Your Own Java Code
 
 ```java
 import com.docreader.converter.DocxToHtmlConverter;
+import java.io.IOException;
 
-public class Example {
+public class MyConverter {
     public static void main(String[] args) {
         try {
             DocxToHtmlConverter converter = new DocxToHtmlConverter();
-            
-            // Convert and save to file
+
+            // Option 1: Convert and save to file
             converter.convert("input.docx", "output.html");
-            
-            // Or get HTML as string
+
+            // Option 2: Get HTML as a string
             String html = converter.convertToString("input.docx");
             System.out.println(html);
-            
+
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }
 ```
 
-## Supported Conversions
+---
 
-### Headers
-- Word Heading 1 → `<h1>`
-- Word Heading 2 → `<h2>`
-- Word Heading 3 → `<h3>`
-- And so on up to `<h6>`
-
-### Text Formatting
-- **Bold** → `<strong>`
-- *Italic* → `<em>`
-- Underline → `<u>`
-
-### Tables
-- Word tables → HTML `<table>` with proper rows and cells
-- First row treated as header (`<th>`)
-- Subsequent rows as data cells (`<td>`)
-
-### Paragraphs
-- Regular paragraphs → `<p>`
-- Multiple paragraphs preserved
-
-## Project Structure
+## 📂 Project Structure
 
 ```
 DocReader/
-├── pom.xml
-├── README.md
-└── src/
-    └── main/
-        └── java/
-            └── com/
-                └── docreader/
-                    ├── Main.java
-                    └── converter/
-                        └── DocxToHtmlConverter.java
+├── input/                          ← Place .docx files here
+├── output/                         ← HTML files appear here
+├── src/
+│   └── main/
+│       └── java/
+│           └── com/
+│               └── docreader/
+│                   ├── Main.java                    ← Entry point
+│                   └── converter/
+│                       └── DocxToHtmlConverter.java ← Conversion logic
+├── target/
+│   └── docx-to-html-converter-1.0-SNAPSHOT.jar     ← Built application
+├── pom.xml                         ← Maven configuration
+└── README.md                       ← This file
 ```
 
-## Dependencies
+---
 
-- **Apache POI 5.2.5**: For reading and processing DOCX files
-- **Apache POI OOXML**: For handling Office Open XML format
-- **XML Beans**: For XML processing
-- **Commons Collections**: Utility library
+## 🔧 Troubleshooting
 
-## Building from Source
+### "Command not found: java"
 
-```bash
-# Clean and compile
-mvn clean compile
+- Java is not installed or not in your PATH
+- Download Java from [adoptium.net](https://adoptium.net/)
 
-# Run tests (if any)
-mvn test
+### "Command not found: mvn"
 
-# Package as JAR
+- Maven is not installed or not in your PATH
+- Download Maven from [maven.apache.org](https://maven.apache.org/)
+
+### "File not found" Error
+
+- Check that your file paths are correct
+- Use quotes around filenames with spaces
+- Use full paths if the file isn't in input/output folders
+
+### Build Errors
+
+Try cleaning and rebuilding:
+
+```powershell
+mvn clean
 mvn package
-
-# The JAR will be created in target/ directory
 ```
 
-## Example
+---
 
-Given a Word document with:
-- Heading 1: "My Document"
-- Paragraph: "This is a sample paragraph with **bold** text."
-- Table with 2 rows and 2 columns
+## 📚 Technical Details
 
-The converter will produce:
+### Dependencies
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Converted Document</title>
-    <style>
-        /* CSS styling */
-    </style>
-</head>
-<body>
-    <h1>My Document</h1>
-    <p>This is a sample paragraph with <strong>bold</strong> text.</p>
-    <table>
-        <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
-        </tr>
-        <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-        </tr>
-    </table>
-</body>
-</html>
-```
+- **Apache POI 5.2.5** - Reads Word documents
+- **Apache POI OOXML** - Handles .docx format
+- **XML Beans 5.1.1** - XML processing
+- **Commons Collections 4.4** - Utilities
 
-## License
+### Output HTML Structure
+
+The converter generates standards-compliant HTML5 with:
+
+- Proper DOCTYPE and meta tags
+- Embedded CSS styling
+- Semantic HTML elements
+- Escaped special characters
+
+---
+
+## 📝 License
 
 This project is open source and available for educational and commercial use.
 
-## Contributing
+---
 
-Contributions are welcome! Feel free to submit issues or pull requests.
+## 🤝 Contributing
+
+Found a bug? Have a feature idea? Contributions welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
+
+---
+
+## 📞 Questions?
+
+If you run into issues, check:
+
+1. Java and Maven are properly installed
+2. File paths are correct
+3. Input file is a valid .docx document
+4. You have write permissions to the output folder
