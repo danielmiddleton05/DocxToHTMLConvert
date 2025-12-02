@@ -7,6 +7,7 @@ import java.util.List;
 public class DocxToHtmlConverter {
 
     private StringBuilder htmlBuilder;
+    private boolean inList = false;
 
     public DocxToHtmlConverter() {
         this.htmlBuilder = new StringBuilder();
@@ -66,8 +67,19 @@ public class DocxToHtmlConverter {
             if (element instanceof XWPFParagraph) {
                 processParagraph((XWPFParagraph) element);
             } else if (element instanceof XWPFTable) {
+                closeListIfOpen();
                 processTable((XWPFTable) element);
             }
+        }
+        
+        // Close any open list at the end
+        closeListIfOpen();
+    }
+    
+    private void closeListIfOpen() {
+        if (inList) {
+            htmlBuilder.append("    </ul>\n");
+            inList = false;
         }
     }
 
@@ -81,21 +93,25 @@ public class DocxToHtmlConverter {
         String style = paragraph.getStyle();
         
         if (style != null && style.toLowerCase().startsWith("heading")) {
+            closeListIfOpen();
             processHeading(paragraph, style);
         } else if (style != null && (style.equals("Heading1") || style.equals("Heading2") || style.equals("Heading3") || style.equals("Heading4") || style.equals("Heading5") || style.equals("Heading6"))) {
+            closeListIfOpen();
             processHeading(paragraph, style);
-        } else {
-            int outlineLevel = paragraph.getNumIlvl() != null ? paragraph.getNumIlvl().intValue() : -1;
-            if (outlineLevel >= 0 && outlineLevel <= 8) {
-                String headingTag = "h" + (outlineLevel + 1);
-                htmlBuilder.append("    <").append(headingTag).append(">");
-                processRuns(paragraph);
-                htmlBuilder.append("</").append(headingTag).append(">\n");
-            } else {
-                htmlBuilder.append("    <p>");
-                processRuns(paragraph);
-                htmlBuilder.append("</p>\n");
+        } else if (paragraph.getNumID() != null) {
+            // This is a bulleted or numbered list item
+            if (!inList) {
+                htmlBuilder.append("    <ul>\n");
+                inList = true;
             }
+            htmlBuilder.append("        <li>");
+            processRuns(paragraph);
+            htmlBuilder.append("</li>\n");
+        } else {
+            closeListIfOpen();
+            htmlBuilder.append("    <p>");
+            processRuns(paragraph);
+            htmlBuilder.append("</p>\n");
         }
     }
 
