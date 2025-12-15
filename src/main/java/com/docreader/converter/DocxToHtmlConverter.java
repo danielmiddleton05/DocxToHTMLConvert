@@ -64,11 +64,11 @@ public class DocxToHtmlConverter {
         List<IBodyElement> elements = document.getBodyElements();
 
         for (IBodyElement element : elements) {
-            if (element instanceof XWPFParagraph) {
-                processParagraph((XWPFParagraph) element);
-            } else if (element instanceof XWPFTable) {
+            if (element instanceof XWPFParagraph paragraph) {
+                processParagraph(paragraph);
+            } else if (element instanceof XWPFTable table) {
                 closeListIfOpen();
-                processTable((XWPFTable) element);
+                processTable(table);
             }
         }
         
