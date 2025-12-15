@@ -65,10 +65,12 @@ public class DocxToHtmlConverter {
 
         for (IBodyElement element : elements) {
             if (element instanceof XWPFParagraph) {
-                processParagraph((XWPFParagraph) element);
+                XWPFParagraph paragraph = (XWPFParagraph) element;
+                processParagraph(paragraph);
             } else if (element instanceof XWPFTable) {
+                XWPFTable table = (XWPFTable) element;
                 closeListIfOpen();
-                processTable((XWPFTable) element);
+                processTable(table);
             }
         }
         
